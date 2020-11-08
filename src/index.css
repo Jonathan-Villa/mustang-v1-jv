@@ -7,12 +7,16 @@ body {
     sans-serif;
 }
 
+h1{
+  text-align: center;
+}
+
 #main-container{
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-items: center;
-  flex-direction: column;
 }
 
 .sub-container{
@@ -21,19 +25,38 @@ body {
   align-items: center;
   justify-content: center;
   height: 700px;
-  width: 700px;
+  width: 90%;
   background-color: white;
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.20);
 }
 
+.inner-sub-container{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 .input-container{
+  border-style: solid 2px black;
   height: 500px;
-  width: 90%;
+  width: 100%;
+  overflow: auto;
+}
+.input-container2{
+  height: 500px;
+  width: 100%;
   overflow: auto;
 }
 
 .api-container{
   height: 70px;
-  width: 100%;
-  
+  width: 90%;
+  list-style: none;
+}
+.api-container2{
+  list-style: none;
+  height: 180px;
+  width: 90%;
 }
