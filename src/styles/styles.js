@@ -1,8 +1,10 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles(() => ({
-  appBar: {
-    backgroundColor: "#4cc9f0",
-    width: "100%",
+  paper: {
+    width: "700px",
+  },
+  paper2: {
+    width: "500px",
   },
 }));

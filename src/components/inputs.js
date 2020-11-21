@@ -7,7 +7,11 @@ import {
   Form,
 } from "@material-ui/core";
 import useInput from "../helpers/useInput";
+import {inputStyles} from "./inputstyles"
+
+
 function Inputs(props) {
+  const styles = inputStyles()
   const [firstName, bindFirstName, resetFirstName] = useInput("");
   const [lastName, bindLastName, resetLastName] = useInput("");
   const [preferredName, bindPreferredName, resetPreferredName] = useInput("");
@@ -51,17 +55,21 @@ function Inputs(props) {
   };
 
   return (
-    <form typeof="post" onSubmit={handleSubmit}>
+    <form typeof="post" className="form-container" onSubmit={handleSubmit}>
       <TextField
+      className={styles.root}
       type="text"
-      fullWidth
+      required={true}
         variant="filled"
         value="firstName"
         name="firstName"
+        autoFocus={true}
         label="First Name"
         {...bindFirstName}
       />
       <TextField
+            className={styles.root}
+        required={true}
         variant="filled"
         value="lastName"
         name="lName"
@@ -69,27 +77,38 @@ function Inputs(props) {
         {...bindLastName}
       />
       <TextField
+      className={styles.root}
         variant="filled"
         value="preferredName"
         name="pName"
+        required={true}
         label="Preferred Name"
         {...bindPreferredName}
+
       />
       <TextField
+            className={styles.root}
+        required={true}
         variant="filled"
         value="email"
         name="email"
         label="Email"
+        type="email"
         {...bindEmail}
       />
       <TextField
+         className={styles.root}
+        required={true}
         variant="filled"
         value="phoneNumber"
         name="phoneNumer"
         label="Phone Number"
+        type="number"
         {...bindPhoneNumber}
       />
       <TextField
+      className={styles.root}
+        required={true}
         variant="filled"
         value="city"
         name="city"
@@ -97,6 +116,8 @@ function Inputs(props) {
         {...bindCity}
       />
       <TextField
+            className={styles.root}
+        required={true}
         variant="filled"
         value="state"
         name="state"
@@ -104,6 +125,8 @@ function Inputs(props) {
         {...bindState}
       />
       <TextField
+            className={styles.root}
+        required={true}
         variant="filled"
         value="zip"
         name="zip"
@@ -111,6 +134,8 @@ function Inputs(props) {
         {...bindZip}
       />
       <TextField
+            className={styles.root}
+        required={true}
         variant="filled"
         value="lat"
         name="lat"
@@ -118,6 +143,8 @@ function Inputs(props) {
         {...bindLat}
       />
       <TextField
+            className={styles.root} 
+        required={true}
         variant="filled"
         value="lng"
         name="lng"
