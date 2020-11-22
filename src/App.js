@@ -1,25 +1,30 @@
 import * as M from "@material-ui/core";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./index.css";
 import { useStyles } from "./styles/styles";
 import Inputs from "./components/inputs";
-
+import { LoadScript, Autocomplete } from '@react-google-maps/api';
+const apiKey = "AIzaSyCdnUr2jm0d1m07Awac2ZgHH66ekKT21oQ"
+const library = ["places"]
 function App() {
+
   const URL = "https://mustang-index.azurewebsites.net/index.json";
   const styles = useStyles();
   const Fname = "";
   const [click, setClick] = useState(false);
   const [input, setInput] = useState();
+  const [autoInput, setAutoInput] = useState([])
   const [createClick, setCreateClick] = useState(false);
   const [updateClick, setUpdateClick] = useState(false);
   const [readOnly, setReadOnly] = useState(true);
-  const [updatedState, setUpdateState] = useState({
-    firstName: "",
-    lastName: "",
-    state: "",
-    city: "",
-    zip: "",
-  });
+
+  const formKey = useRef()
+  const firstName = useRef(null)
+  const lastName = useRef(null)
+  const state = useRef(null)
+  const city = useRef(null)
+  const zip = useRef(null)
+
   let [storage, setStorage] = useState([""]);
 
   const fetchContacts = async () => {
@@ -49,7 +54,6 @@ function App() {
       .then((data) => setStorage(data));
   };
 
-  console.log(storage);
 
   const handleReadClick = () => {
     setClick(true);
@@ -71,6 +75,9 @@ function App() {
   const handleUpdateClick = (data) => {
     setUpdateClick(true);
     setCreateClick(false);
+    let directions = [...autoInput.gm_accessors_.place.qe.place.address_components] 
+    console.log(directions)
+    setAutoInput(directions)
     setReadOnly(false);
   };
 
@@ -82,16 +89,12 @@ function App() {
     setStorage(copyList);
   };
 
-  const handleTextFields = (e) => {
-    const nameValue = e.target.value;
-    const name = e.target.name;
 
-    setUpdateState({
-      [name]: nameValue,
-    });
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault()
   };
 
-  const handleUpdateSubmit = () => {};
+  const handleLoad = (autoComplete) => setAutoInput(autoComplete)
 
   return (
     <div className="sub-container">
@@ -102,6 +105,13 @@ function App() {
             {createClick ? (
               <Inputs data={input} userInputField={handleInput} />
             ) : null}
+            {updateClick ? <LoadScript libraries={library} googleMapsApiKey={apiKey}>
+              <div id="input-container">
+                <Autocomplete onLoad={handleLoad} >
+                  <M.TextField fullWidth autoFocus type="search" id="input-map" variant="filled" />
+                </Autocomplete>
+              </div>
+            </LoadScript> : null}
           </div>
         </M.Paper>
 
@@ -113,46 +123,51 @@ function App() {
               {storage === null ? (
                 <h1>Empty</h1>
               ) : (
-                storage.map((m, index) => (
-                  <form key={index} onSubmit={handleUpdateSubmit}>
-                    <ul>
-                      <li className="api-container2">
-                        <M.TextField
-                          value={updatedState.firstName}
-                          placeholder={m.firstName}
-                          disabled={readOnly}
-                          onChange={handleTextFields}
-                        />
-                        <M.TextField
-                          value={updatedState.lastName}
-                          placeholder={m.lastName}
-                          disabled={readOnly}
-                          onChange={handleTextFields}
-                        />
-                        <M.TextField
-                          value={updatedState.state}
-                          placeholder={m.state}
-                          disabled={readOnly}
-                          onChange={handleTextFields}
-                        />
-                        <M.TextField
-                          value={updatedState.city}
-                          placeholder={m.city}
-                          disabled={readOnly}
-                          onChange={handleTextFields}
-                        />
-                        <M.TextField
-                          value={updatedState.zip}
-                          placeholder={m.zip}
-                          disabled={readOnly}
-                          onChange={handleTextFields}
-                        />
-                      </li>
-                      <hr />
-                    </ul>
-                  </form>
-                ))
-              )}
+                  storage.map((m, index) => (
+                    <form key={index} ref={formKey} onSubmit={handleUpdateSubmit}>
+                      <ul>
+                        <li className="api-container2">
+
+                          <M.TextField
+
+                            ref={firstName}
+                            placeholder={m.firstName}
+                            name="firstName"
+                            disabled={readOnly}
+
+                          />
+                          <M.TextField
+                            ref={lastName}
+                            placeholder={m.lastName}
+                            disabled={readOnly}
+                            name="lastName"
+
+                          />
+                          <M.TextField
+                            ref={state}
+                            placeholder={m.state}
+                            name="state"
+                            disabled={readOnly}
+                          />
+                          <M.TextField
+                            ref={city}
+                            placeholder={m.city}
+                            name="city"
+                            disabled={readOnly}
+
+                          />
+                          <M.TextField
+                            ref={zip}
+                            name="zip"
+                            placeholder={m.zip}
+                            disabled={readOnly}
+                          />
+                        </li>
+                        <hr />
+                      </ul>
+                    </form>
+                  ))
+                )}
             </div>
           </div>
         </M.Paper>
@@ -192,6 +207,8 @@ function App() {
           Delete
         </M.Button>
       </div>
+
+
     </div>
   );
 }
