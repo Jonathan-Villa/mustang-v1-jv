@@ -7,4 +7,7 @@ export const useStyles = makeStyles(() => ({
   paper2: {
     width: "500px",
   },
+  iconBtn: {
+    width: "fit-content"
+  }
 }));

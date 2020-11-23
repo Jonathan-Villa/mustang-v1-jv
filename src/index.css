@@ -2,16 +2,15 @@ body {
   background-color: #212529;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
-h1{
+h1 {
   text-align: center;
 }
 
-.sub-container{
+.sub-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,7 +20,7 @@ h1{
   background-color: inherit;
 }
 
-.inner-sub-container{
+.inner-sub-container {
   display: flex;
   width: 100%;
   align-items: center;
@@ -29,7 +28,7 @@ h1{
   margin-bottom: 20px;
 }
 
-.input-container{
+.input-container {
   border-style: solid 2px black;
   height: 600px;
   width: 100%;
@@ -38,26 +37,26 @@ h1{
   flex-direction: column;
   overflow: auto;
 }
-.input-container2{
+.input-container2 {
   height: 600px;
   width: 100%;
   overflow: auto;
 }
 
-.api-container{
+.api-container {
   height: 70px;
   width: 90%;
   list-style: none;
 }
-.api-container2{
+.api-container2 {
   list-style: none;
   display: flex;
   flex-direction: column;
-  height: 160px;
+  height: 120px;
   width: 200px;
 }
 
-.btn-container{
+.btn-container {
   margin: 20px 0;
   width: 500px;
   display: flex;
@@ -65,7 +64,7 @@ h1{
   align-items: center;
 }
 
-.form-container{
+.form-container {
   width: 90%;
   height: 700px;
   display: flex;
@@ -75,6 +74,33 @@ h1{
   align-items: center;
 }
 
-#input-container{
+.update-container {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 200px;
+  width: 180px;
+  margin: 0px 40px;
+}
+
+.form-update-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+}
+
+#input-container {
   width: 400px;
+}
+
+.options-container{
+  overflow: hidden;
+  height: 200px;
+}
+
+#myList{
+    overflow: hidden;
+    height: 100px;
 }
